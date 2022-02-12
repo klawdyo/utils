@@ -1,6 +1,6 @@
 {
-  "name": "@klawdyo/utils",
-  "version": "0.0.1",
+  "name": "klawtil",
+  "version": "0.0.1-a",
   "description": "Biblioteca de funções úteis",
   "author": "Cláudio Medeiros <contato@klawdyo.com>",
   "license": "MIT",
@@ -11,9 +11,6 @@
   ],
   "main": "./dist/tsc/main.js",
   "types": "./dist/tsc/main.d.ts",
-  "files": [
-    "./dist/tsc/*"
-  ],
   "repository": {
     "url": "https://github.com/klawdyo/utils"
   },
