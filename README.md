@@ -408,3 +408,14 @@ randomNumber(4); // -> 831
 randomLetter(); // -> A
 randomLetter(); // -> S
 ```
+
+
+## Tests
+
+![image](https://user-images.githubusercontent.com/100168/153756212-bb6c32ff-0056-465d-877a-53b4a33fb6ef.png)
+
+
+## Build
+
+![image](https://user-images.githubusercontent.com/100168/153756200-57f2b7a9-28c2-4927-bd44-6e57674c07ab.png)
+
