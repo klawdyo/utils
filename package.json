@@ -20,9 +20,11 @@
   "homepage": "https://github.com/klawdyo/utils#readme",
   "scripts": {
     "lint": "eslint src/ --ext .js,.jsx,.ts,.tsx",
-    "test": "jest",
     "clean": "rm -rf dist build package",
     "ts-node": "ts-node",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --collectCoverageFrom=src/**/*.ts --coverage",
     "docs": "typedoc --entryPoints src/main.ts",
     "build": "tsc -p tsconfig.json",
     "prepublish": "yarn build && yarn docs"
