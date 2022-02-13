@@ -153,30 +153,21 @@ export const isNumeric = (value: any, forceType = false): boolean => {
  * Verifica se o valor passado bate com algum dos tipos
  * http://tobyho.com/2011/01/28/checking-types-in-javascript/
  *
- *    checkTypes( 1, String )
- *    -> false
- *    checkTypes( '1', String )
- *    -> true
- *    checkTypes( 1, Number )
- *    -> true
- *    checkTypes( '1', Number )
- *    -> false
- *    checkTypes( 1, [String, Number] )
- *    -> true
- *    checkTypes( 'a', [String, Number] )
- *    -> true
- *    checkTypes( {}, [String, Number] )
- *    -> false
- *    checkTypes( [], [String, Number] )
- *    -> false
- *    checkTypes( [], [String, Number, Array] )
- *    -> true
- *    checkTypes( {}, [String, Number, Array] )
- *    -> false
- *    checkTypes( {}, [String, Number, Array, Object] )
- *    -> true
+ *   checkTypes( 1, String )                           // -> false
+ *   checkTypes( '1', String )                         // -> true
+ *   checkTypes( 1, Number )                           // -> true
+ *   checkTypes( '1', Number )                         // -> false
+ *   checkTypes( 1, [String, Number] )                 // -> true
+ *   checkTypes( 'a', [String, Number] )               // -> true
+ *   checkTypes( {}, [String, Number] )                // -> false
+ *   checkTypes( [], [String, Number] )                // -> false
+ *   checkTypes( [], [String, Number, Array] )         // -> true
+ *   checkTypes( {}, [String, Number, Array] )         // -> false
+ *   checkTypes( {}, [String, Number, Array, Object] ) // -> true
  *
- *
+ * @param {*} value
+ * @param {*|[*]} types
+ * @returns {Boolean}
  */
 export const checkTypes = (value: any, types: any | any[]) => {
   // null ou undefined retornam false, independente do types
@@ -199,14 +190,14 @@ export const checkTypes = (value: any, types: any | any[]) => {
 /**
  * Verifica se é um e-mail
  *
-  expect(isEmail("claudio")).toBe(false);
-  expect(isEmail("claudio@claudio.com")).toBe(true);
-  expect(isEmail("")).toBe(false);
-  expect(isEmail(null)).toBe(false);
-  expect(isEmail(undefined)).toBe(false);
-  expect(isEmail([])).toBe(false);
-  expect(isEmail({})).toBe(false);
-  expect(isEmail(123)).toBe(false);
+ *    isEmail("claudio")              // -> false
+ *    isEmail("claudio@claudio.com")  // -> true
+ *    isEmail("")                     // -> false
+ *    isEmail(null)                   // -> false
+ *    isEmail(undefined)              // -> false
+ *    isEmail([])                     // -> false
+ *    isEmail({})                     // -> false
+ *    isEmail(123)                    // -> false
  *
  */
 export const isEmail = (value: any): boolean => {

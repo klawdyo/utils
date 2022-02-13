@@ -26,7 +26,7 @@ import { isCPF, isCNPJ } from "klawtil";
 
 ## Content Table
 
-[Comparation](#Comparation)
+[**Comparation**](#Comparation)
 
 - [empty](#empty)
 - [isArray](#isArray)
@@ -43,7 +43,7 @@ import { isCPF, isCNPJ } from "klawtil";
 - [isFalsy](#isFalsy)
 - [isTruthy](#isTruthy)
 
-### [Object](#Object)
+[**Object**](#Object)
 
 - [intersect](#intersect)
 - [objectPath](#objectPath)
@@ -51,7 +51,7 @@ import { isCPF, isCNPJ } from "klawtil";
 - [prefixObjectKeys](#prefixObjectKeys)
 - [whiteList](#whiteList)
 
-### [String](#String)
+[**String**](#String)
 
 - [slug](#slug)
 - [currencyBR](#currencyBR)
@@ -62,10 +62,349 @@ import { isCPF, isCNPJ } from "klawtil";
 - [removeFromPosition](#removeFromPosition)
 - [applyMask](#applyMask)
 
-### [Random](#Random)
+[**Random**](#Random)
 
 - [keyGenerator](#keyGenerator)
 - [randomNumber](#randomNumber)
 - [randomLetter](#randomLetter)
 
 ## Comparation
+
+### empty
+
+```js
+empty(""); // -> true
+empty(null); // -> true
+empty(false); // -> false
+empty(undefined); // -> true
+```
+
+### isArray
+
+```js
+isArray([]); // -> true
+isArray({}); // -> false
+isArray(0); // -> false
+isArray("claudio"); // -> false
+```
+
+### isObject
+
+```js
+isObject({}); // ->true
+isObject([]); // ->true
+isObject("claudio"); // ->false
+isObject(1); // ->false
+isObject(new Date()); // ->true
+```
+
+### isString
+
+```js
+isString("claudio"); // -> true
+isString("12"); // -> true
+isString(12); // -> false
+isString([12]); // -> false
+isString({}); // -> false
+```
+
+### isInteger
+
+```js
+isInteger("1"); // -> true
+isInteger("1", true); // -> false
+isInteger(1); // -> true
+isInteger(1.2); // -> false
+isInteger(1, true); // -> true
+isInteger("1", true); // -> false
+isInteger("claudio"); // -> false
+```
+
+### isFloat
+
+```js
+isFloat("1"); // -> true
+isFloat(1, true); // -> true
+isFloat("1", true); // -> false
+isFloat(1); // -> true
+isFloat(1.2); // -> true
+isFloat("1.2"); // -> true
+isFloat("1.2", true); // -> false
+isFloat("claudio"); // -> false
+isFloat(false); // -> false
+```
+
+### isNumeric
+
+```js
+isNumeric("1"); // -> true
+isNumeric(1, true); // -> true
+isNumeric("1", true); // -> false
+isNumeric(1); // -> true
+isNumeric(1.2); // -> true
+isNumeric("1.2"); // -> true
+isNumeric("1.2", true); // -> false
+isNumeric("claudio"); // -> false
+isNumeric(false); // -> false
+```
+
+### checkTypes
+
+```js
+checkTypes(1, String); // -> false
+checkTypes("1", String); // -> true
+checkTypes(1, Number); // -> true
+checkTypes("1", Number); // -> false
+checkTypes(1, [String, Number]); // -> true
+checkTypes("a", [String, Number]); // -> true
+checkTypes({}, [String, Number]); // -> false
+checkTypes([], [String, Number]); // -> false
+checkTypes([], [String, Number, Array]); // -> true
+checkTypes({}, [String, Number, Array]); // -> false
+checkTypes({}, [String, Number, Array, Object]); // -> true
+```
+
+### isEmail
+
+```js
+isEmail("claudio"); // -> false
+isEmail("claudio@claudio.com"); // -> true
+isEmail(""); // -> false
+isEmail(null); // -> false
+isEmail(undefined); // -> false
+isEmail([]); // -> false
+isEmail({}); // -> false
+isEmail(123); // -> false
+```
+
+### isDate
+
+```js
+isDate("12/12/29"); // ->  true
+isDate("31/12/29"); // ->  false
+isDate("12/31/29"); // ->  true
+isDate("12/12/2029"); // ->  true
+isDate("2029-12-12"); // ->  true
+```
+
+### isDateBR
+
+```js
+isDateBR("31/07/2020"); // true
+isDateBR("32/07/2020"); // false
+isDateBR("7/7/2020"); // false
+```
+
+### isTime
+
+```js
+isTime("12:00"); // ->  true
+isTime("23:00"); // ->  true
+isTime("23:59"); // ->  true
+isTime("24:00"); // ->  false
+isTime("00:00"); // ->  true
+isTime("-12:00"); // ->  false
+isTime("aa:pp"); // ->  false
+isTime("23:60"); // ->  false
+isTime("00:00:00", true); // ->  true
+isTime("23:59:59", true); // ->  true
+isTime("24:59:59", true); // ->  false
+isTime("23:60:59", true); // ->  false
+isTime("23:59:65", true); // ->  false
+isTime("aa:bb:dd", true); // ->  false
+```
+
+### isFalsy
+
+```js
+isFalsy(0); // -> true
+isFalsy(""); // -> true
+isFalsy("0"); // -> true
+isFalsy(NaN); // -> true
+isFalsy(null); // -> true
+isFalsy("NaN"); // -> true
+isFalsy(false); // -> true
+isFalsy("null"); // -> true
+isFalsy("false"); // -> true
+isFalsy(undefined); // -> true
+isFalsy("undefined"); // -> true
+```
+
+### isTruthy
+
+```js
+isTruthy(0); // -> false
+isTruthy(""); // -> false
+isTruthy("0"); // -> false
+isTruthy(NaN); // -> false
+isTruthy(null); // -> false
+isTruthy("NaN"); // -> false
+isTruthy(false); // -> false
+isTruthy("null"); // -> false
+isTruthy("false"); // -> false
+isTruthy(undefined); // -> false
+isTruthy("undefined"); // -> false
+```
+
+## Object
+
+### intersect
+
+```js
+intersect([1, 2, 3], [3, 4, 5]); // -> [ 3 ]
+```
+
+### objectPath
+
+```js
+let obj = { a: "1", b: { c: 10, d: 2, e: { f: "4", g: "5", h: { i: "6" } } } };
+objectPath(obj, "b.e.h.i"); // -> '6'
+```
+
+### groupBy
+
+```js
+const list = [
+ {"id":1,"name":"claudio","age":37,"city":"fortaleza"},
+ {"id":2,"name":"isa","age":9,"city":"natal"},
+ {"id":3,"name":"jose","age":37,"city":"fortaleza"},
+ {"id":4,"name":"marta","age":42,"city":"afonso bezerra"},
+ {"id":5,"name":"joelma","age":42,"city":"afonso bezerra"},
+ {"id":6,"name":"jose","age":24,"city":"assu"}
+]
+groupBy( list, 'name' )
+{
+ "claudio":[
+   {"id":1,"name":"claudio","age":37,"city":"fortaleza"}
+ ],
+ "isa":[
+   {"id":2,"name":"isa","age":9,"city":"natal"}
+ ],
+ "jose":[
+   {"id":3,"name":"jose","age":37,"city":"fortaleza"},
+   {"id":6,"name":"jose","age":24,"city":"assu"}
+ ],
+ "marta":[
+   {"id":4,"name":"marta","age":42,"city":"afonso bezerra"}
+ ],
+ "joelma":[
+   {"id":5,"name":"joelma","age":42,"city":"afonso bezerra"}
+ ]
+}
+
+```
+
+### prefixObjectKeys
+
+```js
+const original = {
+  name: "ze",
+  age: 23,
+};
+
+prefixObjectKeys(original, "people.*.");
+// -> { 'people.*.name': 'ze', 'people.*.age': 23}
+```
+
+### whiteList
+
+```js
+const address = {
+  id: 1,
+  description: "decrição",
+  city_id: 123,
+  city: { id: 123, name: "açu" },
+};
+
+whiteList(address, ["id", "description", "city_id"]);
+// -> { id: 1, description: 'decrição', city_id: 123 }
+
+whiteList([address, address], ["id", "city_id"]);
+// -> [ { id: 1, city_id: '123' }, { id: 1, city_id: '123' } ]
+```
+
+## String
+
+### slug
+
+```js
+slug("José Cláudio + "); // -> 'jose-claudio
+slug("José --    /|<>Cláu=dio "); // -> 'jose-claudio
+```
+
+### currencyBR
+
+```js
+currencyBR(12.34); // -> 'R$ 12,34'
+currencyBR("12.34"); // -> 'R$ 12,34'
+currencyBR("12,34"); // -> null
+```
+
+### upperFirst
+
+```js
+upperFirst("jose claudio medeiros de lima"); // -> Jose Claudio Medeiros de Lima
+upperFirst("JOSE CLAUDIO MEDEIROS DE LIMA"); // -> Jose Claudio Medeiros de Lima
+upperFirst("JoSe cLaUdIo MeDeIrOs De LiMa"); // -> Jose Claudio Medeiros de Lima
+```
+
+### removeAccent
+
+```js
+removeAccent("Açu"); // -> Acu
+removeAccent("José Cláudio"); // -> Jose Claudio
+```
+
+### clearNumber
+
+```js
+clearNumber(12345 - 6, 6); // -> 123456
+clearNumber(12345678, 3); // -> 123
+clearNumber(12345, 10); // -> 0000001234
+```
+
+### insertAtPosition
+
+```js
+insertAtPosition("AAABBB", "-", 3); // -> AAA-BBB
+insertAtPosition("000011122223445555", "->", 7); // -> 0000111->22223445555
+```
+
+### removeFromPosition
+
+```js
+removeFromPosition("00001119922223445555", 7, v9); // -> 000011122223445555
+removeFromPosition("AAACBBB", 3, 4); // -> AAABBB
+```
+
+### applyMask
+
+```js
+applyMask("59650000", "00.000-000"); // -> 59.650-000
+applyMask("99877665544", "(00) 0 0000-0000"); // -> (99) 8 7766-5544
+```
+
+## Random
+
+### keyGenerator
+
+```js
+keyGenerator(5); // -> 11S9P
+keyGenerator(5, false); // -> HrmTF
+keyGenerator(5, false, false); // -> RHCWJ
+keyGenerator(5, false, true, false); // -> vzuyn
+```
+
+### randomNumber
+
+```js
+randomNumber(8, true); // -> 00083159
+randomNumber(4); // -> 831
+```
+
+### randomLetter
+
+```js
+randomLetter(); // -> A
+randomLetter(); // -> S
+```
