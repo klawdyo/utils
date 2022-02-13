@@ -366,3 +366,9 @@ test("removeFromPosition", () => {
   );
   expect(removeFromPosition("AAACBBB", 3, 4)).toBe("AAABBB");
 });
+
+import { applyMask } from "./main";
+test("applyMask", () => {
+  expect(applyMask("59650000", "00.000-000")).toBe("59.650-000");
+  expect(applyMask("99877665544", "(00) 0 0000-0000")).toBe("(99) 8 7766-5544");
+});

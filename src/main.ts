@@ -790,3 +790,45 @@ export function removeFromPosition(
 ): string {
   return [value.slice(0, startPosition), value.slice(endPosition)].join("");
 }
+
+/**
+ * applyMask()
+ * Aplica uma máscara a uma string
+ *
+ * @example
+ * applyMask('59650000', '00.000-000') // -> 59.650-000
+ * applyMask('99877665544', '(00) 0 0000-0000') // -> (99) 8 7766-5544
+ *
+ * @param {String|Number} value Valor original
+ * @param {String} mask
+ * @returns {String}
+ *
+ */
+export function applyMask(value: string | number, mask: string): string {
+  const maskLen = clearNumber(mask).length;
+  let masked = clearNumber(value, maskLen);
+  const specialChars = ["/", "-", ".", "(", ")", " "];
+
+  for (let position = 0; position < mask.length; position += 1) {
+    const current = mask[position];
+    if (specialChars.includes(current))
+      masked = insertAtPosition(masked, current, position);
+  }
+
+  return masked;
+}
+
+/**
+ * randomLetter()
+ * Pega uma letra maiúscula aleatoriamente
+ *
+ * @example
+ * randomLetter() // -> A
+ * randomLetter() // -> S
+ *
+ * @returns {String}
+ */
+export function randomLetter(): string {
+  const idx = Math.floor(1 + Math.random() * 26);
+  return String.fromCharCode(idx + 64);
+}
