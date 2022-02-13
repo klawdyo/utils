@@ -744,3 +744,27 @@ export function clearNumber(
 
   return clearedNumber.padStart(length, "0").substring(0, length);
 }
+
+/**
+ * insertAtPosition()
+ * Insere um conjunto de caracteres em um local específico de uma string
+ *
+ * @example
+ * insertAtPosition('AAABBB', 'C', 3) // -> AAACBBB
+ * insertAtPosition('000011122223445555', 99, 7) // -> 00001119922223445555
+ *
+ * @param {String} value Valor original
+ * @param {String|Number} insertValue Valor que será inserido
+ * @param {Number} position Posição que receberá o novo valor
+ * @returns {String}
+ *
+ */
+export function insertAtPosition(
+  value: string,
+  insertValue: string | number,
+  position: number
+): string {
+  return `${value.substring(0, position)}${insertValue}${value.substring(
+    position
+  )}`;
+}

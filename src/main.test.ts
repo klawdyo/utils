@@ -350,3 +350,11 @@ test("clearNumber", () => {
   expect(clearNumber(12345, 10)).toBe("0000012345");
   expect(clearNumber("(84) 9 9988-7766", 11)).toBe("84999887766");
 });
+
+import { insertAtPosition } from "./main";
+test("insertAtPosition", () => {
+  expect(insertAtPosition("AAABBB", "C", 3)).toBe("AAACBBB");
+  expect(insertAtPosition("000011122223445555", 99, 7)).toBe(
+    "00001119922223445555"
+  );
+});
