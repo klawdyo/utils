@@ -38,6 +38,7 @@ jobs:
       - name: Build typescript code
         run: yarn build
 
+      # Adds automatic badges
       - name: Add Badges
         uses: rocktimsaikia/badge-it@master
         with:
