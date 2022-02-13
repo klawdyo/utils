@@ -417,4 +417,6 @@ randomLetter(); // -> S
 
 ## Build
 
+Tested on node versions 10, 12, 14 and 16
+
 ![image](https://user-images.githubusercontent.com/100168/153756200-57f2b7a9-28c2-4927-bd44-6e57674c07ab.png)
