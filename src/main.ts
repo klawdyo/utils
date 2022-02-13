@@ -519,6 +519,10 @@ export const slug = (value: string): string => {
 /**
  * Converte um número passado para o formato do Real Brasileiro
  *
+ * https://stackoverflow.com/a/64909632/3240078
+ * NumberFormat use small non-breaking space (\u202f) for thousand separator
+ * and normal non-breaking space beforece currency (\xa0)
+ *
  * @example
  *  currencyBR(12.34)    // -> 'R$ 12,34'
  *  currencyBR('12.34')  // -> 'R$ 12,34'
@@ -535,7 +539,10 @@ export const currencyBR = (value: number | string): string => {
       style: "currency",
       currency: "BRL",
     }).format(+value)
-  ).replace(".", ",");
+  )
+    .replace(".", ",")
+    .replace(/\xa0/g, " ")
+    .replace(/\u202f/g, " ");
 };
 
 /**
