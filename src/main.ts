@@ -658,3 +658,37 @@ export const whiteList = (obj: any | any[], keys: any[]): any => {
 
   return obj;
 };
+
+/**
+ * Substitui os caracteres acentuados por semelhantes não acentuados respeitando
+ * maiúsculas e minúsculas
+ *
+ * @example
+ * removeAccent('Açu') // -> Acu
+ *
+ * @param value
+ * @returns
+ */
+export const removeAccent = (value: string): string => {
+  value = String(value);
+  const accents =
+    "ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝŔÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿŕ";
+
+  const noAccents =
+    "AAAAAAACEEEEIIIIDNOOOOOOUUUUYRsBaaaaaaaceeeeiiiionoooooouuuuybyr";
+  let newValue = "";
+  for (let i = 0; i < value.length; i++) {
+    let troca = false;
+    for (let a = 0; a < accents.length; a++) {
+      if (value.substr(i, 1) == accents.substr(a, 1)) {
+        newValue += noAccents.substr(a, 1);
+        troca = true;
+        break;
+      }
+    }
+    if (troca == false) {
+      newValue += value.substr(i, 1);
+    }
+  }
+  return newValue;
+};

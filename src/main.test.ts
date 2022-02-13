@@ -323,3 +323,10 @@ test("whiteList - Parâmetro como array de objetos", () => {
   expect(Object.keys(result[0]).length).toBe(2);
   expect(result[0]).toMatchObject({ description: "decrição", id: 1 });
 });
+
+import { removeAccent } from "./main";
+test("removeAccent", () => {
+  expect(removeAccent("José Cláudio Medeiros de Lima")).toBe(
+    "Jose Claudio Medeiros de Lima"
+  );
+});
