@@ -541,8 +541,8 @@ export const currencyBR = (value: number | string): string => {
     }).format(+value)
   )
     .replace(".", ",")
-    .replace(/\xa0/g, " ")
-    .replace(/\u202f/g, " ");
+    .replace(/[\xa0\u202f]/g, "");
+  // .replace(/\u202f/g, "");
 };
 
 /**
