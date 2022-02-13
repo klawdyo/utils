@@ -715,3 +715,32 @@ export function randomNumber(
 
   return +value;
 }
+
+/**
+ * Limpa um número informado, retirando caracteres diferentes de números,
+ * preenchendo com zeros à esquerda se for menor que o tamanho exato e
+ * removendo uma parte do número se for maior que tamanho definido.
+ *
+ * 1) Retira caracteres não-numéricos
+ * 2) Preenche com zeros à esquerda se 'value' for menor que 'length'
+ * 3) Remove caracteres à direita se 'value' for maior que 'length'
+ *
+ * @example
+ *  clearNumber(12345-6, 6) // -> 123456
+ *  clearNumber(12345678, 3) // -> 123
+ *  clearNumber(12345, 10) // -> 0000001234
+ *
+ * @param {Number|String} value
+ * @param {Number} length Tamanho exato. Se for null, só retira os caracteres não-numéricos
+ * @returns {String} Número com o tamanho exato
+ */
+export function clearNumber(
+  value: string | number,
+  length: number | null = null
+): string {
+  const clearedNumber = String(value).replace(/([^\d]+)/gi, "");
+
+  if (!length || clearedNumber.length === length) return clearedNumber;
+
+  return clearedNumber.padStart(length, "0").substring(0, length);
+}
