@@ -18,10 +18,10 @@ npm install klawtil
 
 ```js
 // Modules
-const { isCPF, isCNPJ } = require("klawtil");
+const { whiteList, isFalsy } = require("klawtil");
 
 // ES6
-import { isCPF, isCNPJ } from "klawtil";
+import { whiteList, isFalsy } from "klawtil";
 ```
 
 ## Content Table
