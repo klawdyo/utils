@@ -768,3 +768,25 @@ export function insertAtPosition(
     position
   )}`;
 }
+
+/**
+ * removeFromPosition()
+ * Retira um conjunto de caracteres de um local específico de uma string
+ *
+ * @example
+ * removeFromPosition('00001119922223445555', 7,9) // -> 000011122223445555
+ * removeFromPosition('AAACBBB', 3,4) // -> AAABBB
+ *
+ * @param {String|Number} value Valor original
+ * @param {String|Number} startPosition
+ * @param {String|Number} endPosition
+ * @returns {String}
+ *
+ */
+export function removeFromPosition(
+  value: string,
+  startPosition: number,
+  endPosition: number
+): string {
+  return [value.slice(0, startPosition), value.slice(endPosition)].join("");
+}
