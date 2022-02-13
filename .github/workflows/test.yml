@@ -41,6 +41,6 @@ jobs:
       - name: Add Badges
         uses: rocktimsaikia/badge-it@master
         with:
-          GITHUB_TOKEN: ${{ secrets.MY_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           badges: "gh_license, gh_version, gh_stars, gh_repo_size, gh_code_size"
           badge-style: "flat-square"
