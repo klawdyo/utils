@@ -281,6 +281,7 @@ export const isTime = (value: string, seconds = false) => {
   const regex = seconds
     ? /^([01][0-9]|2[0-3])\:([0-5][0-9])\:([0-5][0-9])$/
     : /^([01][0-9]|2[0-3])\:([0-5][0-9])$/;
+
   if (!empty(value)) {
     return regex.test(value);
   }

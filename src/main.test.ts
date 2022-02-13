@@ -103,6 +103,8 @@ test("checkTypes", () => {
   expect(checkTypes([], [String, Number, Array])).toBe(true);
   expect(checkTypes({}, [String, Number, Array])).toBe(false);
   expect(checkTypes({}, [String, Number, Array, Object])).toBe(true);
+  expect(checkTypes(null, [String, Number, Array, Object])).toBe(false);
+  expect(checkTypes(undefined, [String, Number, Array, Object])).toBe(false);
 });
 
 import { isEmail } from "./main";
@@ -150,6 +152,7 @@ test("isTime", () => {
   isTime("23:60:59", true); // ->  false
   isTime("23:59:65", true); // ->  false
   isTime("aa:bb:dd", true); // ->  false
+  isTime(""); // ->  false
 });
 
 import { isFalsy } from "./main";
@@ -237,6 +240,8 @@ test("keyGenerator", () => {
   expect(keyGenerator(5, false)).toMatch(/^[A-Za-z]{5}$/); // -> HrmTF
   expect(keyGenerator(5, false, false)).toMatch(/^[A-Z]{5}$/); // -> RHCWJ
   expect(keyGenerator(5, false, true, false)).toMatch(/^[a-z]{5}$/); // -> vzuyn
+
+  expect(() => keyGenerator(5, false, false, false)).toThrowError();
 });
 
 import { slug } from "./main";
@@ -253,16 +258,13 @@ test("currencyBR", () => {
 });
 
 import { upperFirst } from "./main";
+
 test("upperFirst", () => {
-  expect(upperFirst("jose claudio medeiros de lima")).toBe(
-    "Jose Claudio Medeiros de Lima"
-  );
-  expect(upperFirst("JOSE CLAUDIO MEDEIROS DE LIMA")).toBe(
-    "Jose Claudio Medeiros de Lima"
-  );
-  expect(upperFirst("JoSe cLaUdIo MeDeIrOs De LiMa")).toBe(
-    "Jose Claudio Medeiros de Lima"
-  );
+  expect(upperFirst("jose claudio")).toBe("Jose Claudio");
+  expect(upperFirst("JOSE CLAUDIO")).toBe("Jose Claudio");
+  expect(upperFirst("JoSe cLaUdIo")).toBe("Jose Claudio");
+  expect(upperFirst("")).toBe("");
+  expect(upperFirst("de")).toBe("de");
 });
 
 import { prefixObjectKeys } from "./main";
@@ -281,6 +283,8 @@ test("prefixObjectKeys", () => {
     prefix_name: "ze",
     prefix_age: 23,
   });
+
+  expect(prefixObjectKeys(original)).toMatchObject(original);
 });
 
 import { whiteList } from "./main";
@@ -371,4 +375,10 @@ import { applyMask } from "./main";
 test("applyMask", () => {
   expect(applyMask("59650000", "00.000-000")).toBe("59.650-000");
   expect(applyMask("99877665544", "(00) 0 0000-0000")).toBe("(99) 8 7766-5544");
+});
+
+import { randomLetter } from "./main";
+test("randomLetter", () => {
+  expect(randomLetter()).toMatch(/^[A-Z]{1}$/);
+  expect(randomLetter()).toMatch(/^[A-Z]{1}$/);
 });
