@@ -1,6 +1,6 @@
 {
   "name": "klawtil",
-  "version": "0.0.6",
+  "version": "0.0.6-a",
   "description": "Biblioteca de funções úteis",
   "author": "Cláudio Medeiros <contato@klawdyo.com>",
   "license": "MIT",
@@ -24,7 +24,8 @@
     "clean": "rm -rf dist build package",
     "ts-node": "ts-node",
     "docs": "typedoc --entryPoints src/main.ts",
-    "build": "tsc -p tsconfig.json"
+    "build": "tsc -p tsconfig.json",
+    "prepublish": "yarn build && yarn docs"
   },
   "devDependencies": {
     "@types/jest": "^26.0.21",
