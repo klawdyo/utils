@@ -409,13 +409,12 @@ randomLetter(); // -> A
 randomLetter(); // -> S
 ```
 
-
 ## Tests
 
-![image](https://user-images.githubusercontent.com/100168/153756212-bb6c32ff-0056-465d-877a-53b4a33fb6ef.png)
+100% tested and 100% tests coverage
 
+![image](https://user-images.githubusercontent.com/100168/153757107-cbc3de9d-f601-487b-9a5d-4c2f4e74241f.png)
 
 ## Build
 
 ![image](https://user-images.githubusercontent.com/100168/153756200-57f2b7a9-28c2-4927-bd44-6e57674c07ab.png)
-
