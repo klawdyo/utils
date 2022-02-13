@@ -26,7 +26,7 @@ import { isCPF, isCNPJ } from "klawtil";
 
 ## Content Table
 
-### [Comparation](#Comparation)
+[Comparation](#Comparation)
 
 - [empty](#empty)
 - [isArray](#isArray)
