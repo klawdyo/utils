@@ -692,3 +692,26 @@ export const removeAccent = (value: string): string => {
   }
   return newValue;
 };
+
+/**
+ * randomNumber()
+ * Cria um número aleatório com o número de caracteres
+ *
+ * @example
+ * randomNumber(8, true) // -> 00083159
+ * randomNumber(4) // -> 831
+ *
+ * @param {Integer} length
+ * @param {Boolean} forceLength Adiciona zeros à esquerda para ter os números de caractes exatos
+ * @returns {String}
+ */
+export function randomNumber(
+  length: number,
+  forceLength = false
+): number | string {
+  const value = Math.floor(Math.random() * 10 ** length);
+
+  if (forceLength) return String(value).padStart(length, "0");
+
+  return +value;
+}

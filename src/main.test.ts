@@ -330,3 +330,23 @@ test("removeAccent", () => {
     "Jose Claudio Medeiros de Lima"
   );
 });
+
+import { randomNumber } from "./main";
+test("randomNumber", () => {
+  const value1 = randomNumber(8, true);
+  const value2 = randomNumber(4);
+
+  expect(String(value1).length).toBe(8);
+
+  expect(String(value2).length <= 4).toBe(true);
+});
+
+import { clearNumber } from "./main";
+test("clearNumber", () => {
+  expect(clearNumber("12345-6", 6)).toBe("123456");
+  expect(clearNumber("12345678", 3)).toBe("123");
+  expect(clearNumber(12345678, 3)).toBe("123");
+  expect(clearNumber("12345", 10)).toBe("0000012345");
+  expect(clearNumber(12345, 10)).toBe("0000012345");
+  expect(clearNumber("(84) 9 9988-7766", 11)).toBe("84999887766");
+});
