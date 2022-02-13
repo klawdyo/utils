@@ -1,4 +1,4 @@
-# klawtil
+# klawtil ![GitHub](<https://img.shields.io/github/license/klawdyo/klawtil?style=flat-square>) ![GitHub](<https://img.shields.io/github/package-json/v/klawdyo/klawtil?style=flat-square>) ![GitHub](<https://img.shields.io/github/stars/klawdyo/klawtil?style=flat-square>) ![GitHub](<https://img.shields.io/github/repo-size/klawdyo/klawtil?style=flat-square>) ![GitHub](<https://img.shields.io/github/languages/code-size/klawdyo/klawtil?style=flat-square>)
 
 Util functions library
 
