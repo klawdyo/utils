@@ -355,6 +355,13 @@ test("clearNumber", () => {
   expect(clearNumber("(84) 9 9988-7766", 11)).toBe("84999887766");
 });
 
+import { clearFalsy } from "./main";
+test("clearFalsy", () => {
+  expect(
+    clearFalsy({ id: 1, age: "0", idade: "NaN", birth: "" })
+  ).toMatchObject({ id: 1 });
+});
+
 import { insertAtPosition } from "./main";
 test("insertAtPosition", () => {
   expect(insertAtPosition("AAABBB", "C", 3)).toBe("AAACBBB");

@@ -50,6 +50,7 @@ import { whiteList, isFalsy } from "klawtil";
 - [groupBy](#groupBy)
 - [prefixObjectKeys](#prefixObjectKeys)
 - [whiteList](#whiteList)
+- [clearFalsy](#clearFalsy)
 
 [**String**](#String)
 
@@ -321,6 +322,13 @@ whiteList(address, ["id", "description", "city_id"]);
 
 whiteList([address, address], ["id", "city_id"]);
 // -> [ { id: 1, city_id: '123' }, { id: 1, city_id: '123' } ]
+```
+
+### clearFalsy
+
+```js
+clearFalsy({ id: 1, age: "0", confirmed: "false", birth: "" }); // -> { id: 1 }
+clearFalsy({ id: 1, age: "0", idade: "NaN", birth: "" }); // -> { id: 1 }
 ```
 
 ## String

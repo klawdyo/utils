@@ -745,6 +745,22 @@ export function clearNumber(
 }
 
 /**
+ * Limpa os valores falsy do objeto informado
+ *
+ * @example
+ * clearFalsy({ id:1, age:'0', idade: 'NaN', birth: '' }); // -> { id: 1 }
+ *
+ * @param {Object} value
+ * @returns {Object} Objeto sem os valores
+ */
+export function clearFalsy(value: Record<string, any>) {
+  Object.keys(value).forEach((key) => {
+    if (isFalsy(value[key])) delete value[key];
+  });
+  return value;
+}
+
+/**
  * insertAtPosition()
  * Insere um conjunto de caracteres em um local específico de uma string
  *
