@@ -287,6 +287,36 @@ test("prefixObjectKeys", () => {
   expect(prefixObjectKeys(original)).toMatchObject(original);
 });
 
+import { objectFlat } from "./main";
+test("objectFlat", () => {
+  const obj = {
+    id: 1,
+    name: "claudio",
+    age: 39,
+    email: "email@mail.com",
+    address: {
+      street: "Monkey St.",
+      number: "599",
+      city: "Halalala",
+      zipcode: "9876543",
+    },
+  };
+
+  // ->
+  const expected = {
+    id: 1,
+    name: "claudio",
+    age: 39,
+    email: "email@mail.com",
+    "address.street": "Monkey St.",
+    "address.number": "599",
+    "address.city": "Halalala",
+    "address.zipcode": "9876543",
+  };
+
+  expect(objectFlat(obj)).toMatchObject(expected);
+});
+
 import { whiteList } from "./main";
 test("whiteList - Parâmetro como objeto", () => {
   const address = {

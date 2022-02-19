@@ -49,6 +49,7 @@ import { whiteList, isFalsy } from "klawtil";
 - [objectPath](#objectPath)
 - [groupBy](#groupBy)
 - [prefixObjectKeys](#prefixObjectKeys)
+- [objectFlat](#objectFlat)
 - [whiteList](#whiteList)
 - [clearFalsy](#clearFalsy)
 
@@ -305,6 +306,31 @@ const original = {
 
 prefixObjectKeys(original, "people.*.");
 // -> { 'people.*.name': 'ze', 'people.*.age': 23}
+```
+
+### objectFlat
+
+```js
+const obj = {
+  id: 1,
+  name: "claudio",
+  age: 39,
+  email: "email@mail.com",
+  address: {
+    street: "Monkey St.",
+    number: "599",
+    city: "Halalala",
+    zipcode: "9876543",
+  },
+};
+
+objectFlat(obj);
+// ->
+// {
+//   id: 1, name: 'claudio', age: 39, email: 'email@mail.com',
+//   'address.street': 'Monkey St.', 'address.number': '599',
+//   'address.city': 'Halalala', 'address.zipcode': '9876543'
+// }
 ```
 
 ### whiteList

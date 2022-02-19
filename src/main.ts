@@ -620,7 +620,69 @@ export const prefixObjectKeys = (obj: any, prefix = ""): any => {
     .forEach((item) => (output[item.prefixed] = obj[item.key]));
 
   return output;
-};
+}
+
+/**
+ * objectFlat()
+ * Recebe um objeto e o transforma em uma versão plana, com suas chaves
+ * multinível unidas por um ponto.
+ *
+ * @link https://stackoverflow.com/a/34514143/3240078
+ *
+ * @example
+ *
+ *   const obj = {
+ *     id: 1, name: 'claudio', age: 39, email: 'email@mail.com',
+ *     address: {
+ *        street': 'Monkey St.', number': '599', city': 'Halalala', zipcode': '9876543'
+ *     }
+ *   }
+ *
+ *   objectFlat( obj )
+ *     // ->
+ *     {
+ *       id: 1, name: 'claudio', age: 39, email: 'email@mail.com',
+ *       'address.street': 'Monkey St.', 'address.number': '599',
+ *       'address.city': 'Halalala', 'address.zipcode': '9876543'
+ *     }
+ *
+ * @param {Object} obj
+ * @returns {Object}
+ */
+export function objectFlat(obj: Record<string, any>): Record<string, any> {
+  function traverseAndFlatten(
+    currentNode: any,
+    target: any,
+    flattenedKey: string | undefined = undefined
+  ) {
+    for (const key in currentNode) {
+      // eslint-disable-next-line no-prototype-builtins
+      if (currentNode.hasOwnProperty(key)) {
+        let newKey;
+        if (flattenedKey === undefined) {
+          newKey = key;
+        } else {
+          newKey = flattenedKey + "." + key;
+        }
+
+        const value = currentNode[key];
+        if (typeof value === "object") {
+          traverseAndFlatten(value, target, newKey);
+        } else {
+          target[newKey] = value;
+        }
+      }
+    }
+  }
+
+  function flatten(obj: Record<string, any>) {
+    const flattenedObject = {};
+    traverseAndFlatten(obj, flattenedObject);
+    return flattenedObject;
+  }
+
+  return flatten(obj);
+}
 
 /**
  * Mantém somente as chaves do objeto que estão na lista branca
