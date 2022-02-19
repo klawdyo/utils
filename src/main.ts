@@ -379,19 +379,19 @@ export const intersect = (array1: any[], array2: any[]): any[] => {
  * let obj = { a:'1',  b:{ c:10, d:2, e:{ f:'4', g:'5', h:{ i:'6' } } } }
  * objectPath( obj , 'b.e.h.i' ); // -> '6'
  *
- * @param  {Object} objObject
- * @param  {String} strAddress Endereço no formato 'chave.subchave.outrasubchave'
- * @return {Mixed}  Valor de acordo com o caminho
+ * @param  {Object} obj
+ * @param  {String} path Endereço no formato 'chave.subchave.outrasubchave'
+ * @returns {*}  Valor de acordo com o caminho
  */
-export const objectPath = (objObject: any, strAddress: string) => {
-  const keys = strAddress.split(".");
+export function objectPath(obj: any, path: string) {
+  const keys = path.split(".");
 
   keys.forEach((key) => {
-    objObject = objObject[key];
+    obj = obj[key];
   });
 
-  return objObject;
-};
+  return obj;
+}
 
 /********************
  * FUNÇÕES DE APOIO
@@ -610,7 +610,7 @@ export const upperFirst = (value: string): string => {
  * @param {Object} obj Objecto original
  * @param {String} prefix Prefixo que será aplicado
  */
-export const prefixObjectKeys = (obj: any, prefix = ""): any => {
+export function prefixObjectKeys(obj: any, prefix = ""): any {
   if (!prefix) return obj;
 
   const output: any = {};
@@ -893,15 +893,17 @@ export function removeFromPosition(
  * @param {ApplyVarsOptions} options
  */
 export function applyVars(
-  text: string,
+  value: string,
   vars: Record<string, any>,
   options: Partial<ApplyVarsOptions> = {}
 ): string {
   const { start = ":", end = "" } = options;
 
-  return Object.keys(vars).reduce(
-    (text, key) => text.replace(`${start}${key}${end}`, vars[key]),
-    text
+  const flattened = objectFlat(vars);
+
+  return Object.keys(flattened).reduce(
+    (text, key) => text.replace(`${start}${key}${end}`, flattened[key]),
+    value
   );
 }
 

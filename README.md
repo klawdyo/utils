@@ -1,4 +1,4 @@
-# klawtil ![GitHub](<https://img.shields.io/github/license/klawdyo/klawtil?style=flat-square>) ![GitHub](<https://img.shields.io/github/package-json/v/klawdyo/klawtil?style=flat-square>) ![GitHub](<https://img.shields.io/github/stars/klawdyo/klawtil?style=flat-square>) ![GitHub](<https://img.shields.io/github/repo-size/klawdyo/klawtil?style=flat-square>) ![GitHub](<https://img.shields.io/github/languages/code-size/klawdyo/klawtil?style=flat-square>)
+# klawtil ![GitHub](https://img.shields.io/github/license/klawdyo/klawtil?style=flat-square) ![GitHub](https://img.shields.io/github/package-json/v/klawdyo/klawtil?style=flat-square) ![GitHub](https://img.shields.io/github/stars/klawdyo/klawtil?style=flat-square) ![GitHub](https://img.shields.io/github/repo-size/klawdyo/klawtil?style=flat-square) ![GitHub](https://img.shields.io/github/languages/code-size/klawdyo/klawtil?style=flat-square)
 
 Util functions library
 
@@ -63,6 +63,7 @@ import { whiteList, isFalsy } from "klawtil";
 - [insertAtPosition](#insertAtPosition)
 - [removeFromPosition](#removeFromPosition)
 - [applyMask](#applyMask)
+- [applyVars](#applyVars)
 
 [**Random**](#Random)
 
@@ -416,6 +417,54 @@ removeFromPosition("AAACBBB", 3, 4); // -> AAABBB
 ```js
 applyMask("59650000", "00.000-000"); // -> 59.650-000
 applyMask("99877665544", "(00) 0 0000-0000"); // -> (99) 8 7766-5544
+```
+
+### applyVars
+
+```js
+// Object with some random vars
+const vars = {
+    id: 1,
+    name: "claudio",
+    age: 39,
+    email: "email@mail.com",
+    address: {
+      street: "Monkey St.",
+      number: "599",
+      city: "Halalala",
+      zipcode: "9876543",
+    },
+  };
+
+applyVars("My name is :name and my email is :email.", vars);
+// -> 'My name is claudio and my email is email@mail.com.'
+
+applyVars("My name is {name} and my email is {email}.", vars, {
+  start: "{",
+  end: "}",
+});
+// -> 'My name is claudio and my email is email@mail.com.'
+
+applyVars("My name is {{name}} and my email is {{email}}.", vars, {
+  start: "{{",
+  end: "}}",
+});
+// -> 'My name is claudio and my email is email@mail.com.'
+
+
+applyVars(
+  "My name is :name and my address is :address.street, :address.zipcode",
+  vars
+)
+// -> "My name is claudio and my address is Monkey St., 9876543");
+
+
+applyVars(
+  "My name is {name} and my address is {address.street}, {address.zipcode}",
+  vars,
+  { start: "{", end: "}" }
+// -> "My name is claudio and my address is Monkey St., 9876543");
+
 ```
 
 ## Random
