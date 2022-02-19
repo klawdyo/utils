@@ -389,3 +389,25 @@ test("randomLetter", () => {
   expect(randomLetter()).toMatch(/^[A-Z]{1}$/);
   expect(randomLetter()).toMatch(/^[A-Z]{1}$/);
 });
+
+import { applyVars } from "./main";
+test("applyVars", () => {
+  const values = { id: 1, name: "claudio", age: 39, email: "email@mail.com" };
+  const expected = "Olá, claudio. Seu e-mail ainda é email@mail.com?";
+
+  expect(applyVars("Olá, :name. Seu e-mail ainda é :email?", values)).toBe(
+    expected
+  );
+  expect(
+    applyVars("Olá, {name}. Seu e-mail ainda é {email}?", values, {
+      start: "{",
+      end: "}",
+    })
+  ).toBe(expected);
+  expect(
+    applyVars("Olá, {{name}}. Seu e-mail ainda é {{email}}?", values, {
+      start: "{{",
+      end: "}}",
+    })
+  ).toBe(expected);
+});

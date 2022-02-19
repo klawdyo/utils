@@ -10,6 +10,15 @@
 
 /*************************************************************************
  *
+ * TYPES
+ */
+type ApplyVarsOptions = {
+  start: string;
+  end: string;
+};
+
+/*************************************************************************
+ *
  * COMPARAÇÃO DE VALORES
  */
 
@@ -804,6 +813,34 @@ export function removeFromPosition(
   endPosition: number
 ): string {
   return [value.slice(0, startPosition), value.slice(endPosition)].join("");
+}
+
+/**
+ * applyVars()
+ * Aplica variáveis a um texto
+ *
+ * @example
+ * const values = { id: 1, name: 'claudio', age: 39, email: 'email@mail.com' }
+ *
+ * applyVars('Olá, :name. Seu e-mail ainda é :email?', values)
+ * applyVars('Olá, {name}. Seu e-mail ainda é {email}?', values,     { start: '{',  end: '}' })
+ * applyVars('Olá, {{name}}. Seu e-mail ainda é {{email}}?', values, { start: '{{', end: '}}'})
+ *
+ * @param {String} text
+ * @param {Object} vars
+ * @param {ApplyVarsOptions} options
+ */
+export function applyVars(
+  text: string,
+  vars: Record<string, any>,
+  options: Partial<ApplyVarsOptions> = {}
+): string {
+  const { start = ":", end = "" } = options;
+
+  return Object.keys(vars).reduce(
+    (text, key) => text.replace(`${start}${key}${end}`, vars[key]),
+    text
+  );
 }
 
 /**
