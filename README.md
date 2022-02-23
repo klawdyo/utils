@@ -53,6 +53,10 @@ import { whiteList, isFalsy } from "klawtil";
 - [whiteList](#whiteList)
 - [clearFalsy](#clearFalsy)
 
+[**Array**](#Array)
+
+- [sortByKey](#sortByKey)
+
 [**String**](#String)
 
 - [slug](#slug)
@@ -358,6 +362,13 @@ whiteList([address, address], ["id", "city_id"]);
 ```js
 clearFalsy({ id: 1, age: "0", confirmed: "false", birth: "" }); // -> { id: 1 }
 clearFalsy({ id: 1, age: "0", idade: "NaN", birth: "" }); // -> { id: 1 }
+```
+
+### sortByKey
+
+```js
+sortByKey([{ name: "marta" }, { name: "claudio" }, { name: "isa" }], "name");
+// -> [ {name: 'claudio',}, {name: 'isa',}, {name: 'marta',} ]
 ```
 
 ## String

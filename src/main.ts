@@ -1011,3 +1011,25 @@ export const filesize = (bytes: number | string): string => {
   return `${(+bytes / 1073741824) | 0} Gb`;
 };
 
+/**
+ * Ordena um array de objetos a partir de uma chave
+ *
+ * sortByKey( [{name: 'marta'}, {name: 'claudio'}, {name: 'isa'}], 'name' )
+ *  // -> [ {name: 'claudio',}, {name: 'isa',}, {name: 'marta',} ]
+ *
+ * @param {Object[]} list
+ */
+export const sortByKey = (
+  list: Array<Record<string, any>>,
+  key: any
+): Record<string, any>[] => {
+  function compare(a: any, b: any): any {
+    if (String(a[key]).toLowerCase() < String(b[key]).toLowerCase()) return -1;
+    if (String(a[key]).toLowerCase() > String(b[key]).toLowerCase()) return 1;
+    return 0;
+  }
+
+  return [...list].sort(compare);
+
+  // list.sort();
+};
