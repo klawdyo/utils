@@ -948,3 +948,33 @@ export function randomLetter(): string {
   const idx = Math.floor(1 + Math.random() * 26);
   return String.fromCharCode(idx + 64);
 }
+
+/**
+ * Exibe uma quantidade como string numérica
+ *
+ * @example
+ * quantity(0, 'mensagens', 'mensagem', 'nenhuma mensagem') // nenhuma mensagem
+ * quantity(0, 'mensagens', 'mensagem', null)               // 0 mensagem
+ * quantity(1, 'mensagens', 'mensagem', 'nenhuma mensagem') // 1 mensagem
+ * quantity(2, 'mensagens', 'mensagem', 'nenhuma mensagem') // 2 mensagens
+ *
+ * @param {Number|'String} A quantidade
+ * @param {String} Sufixo que será usado quando a quantidade for mais de um
+ * @param {String} Sufixo que será usado quando a quantidade for 1
+ * @param {String|Null} Texto usado quando a quantidade for zero. Se estiver em branco,
+ *                 será usado o sufixo individual
+ *
+ * @return {String} Texto contendo as variações
+ */
+export const quantity = (
+  qty: number | string,
+  suffixMany: string,
+  suffixOne: string,
+  textEmpty: string | null
+): string => {
+  qty = +qty;
+
+  if (qty === 0) return textEmpty || `0 ${suffixOne}`;
+  else if (qty === 1) return `1 ${suffixOne}`;
+  else return `${qty} ${suffixMany}`;
+};

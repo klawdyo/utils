@@ -467,6 +467,21 @@ applyVars(
 
 ```
 
+### quantity
+
+```js
+quantity(0, "mensagens", "mensagem");
+// -> 0 mensagem
+
+quantity(0, "mensagens", "mensagem", "nenhuma mensagem");
+// -> nenhuma mensagem
+
+quantity(1, "mensagens", "mensagem", "nenhuma mensagem");
+// -> 1 mensagem
+
+quantity(2, "mensagens", "mensagem", "nenhuma mensagem");
+// -> 2 mensagens
+```
 ## Random
 
 ### keyGenerator

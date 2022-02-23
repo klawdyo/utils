@@ -469,3 +469,20 @@ test("applyVars", () => {
     )
   ).toBe("My name is claudio and my address is Monkey St., 9876543");
 });
+
+import { quantity } from "./main";
+test("quantity", () => {
+  expect(quantity(0, "mensagens", "mensagem", "nenhuma mensagem")).toBe(
+    "nenhuma mensagem"
+  );
+
+  expect(quantity(0, "mensagens", "mensagem", null)).toBe("0 mensagem");
+
+  expect(quantity(1, "mensagens", "mensagem", "nenhuma mensagem")).toBe(
+    "1 mensagem"
+  );
+
+  expect(quantity(2, "mensagens", "mensagem", "nenhuma mensagem")).toBe(
+    "2 mensagens"
+  );
+});
