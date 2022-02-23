@@ -364,6 +364,8 @@ clearFalsy({ id: 1, age: "0", confirmed: "false", birth: "" }); // -> { id: 1 }
 clearFalsy({ id: 1, age: "0", idade: "NaN", birth: "" }); // -> { id: 1 }
 ```
 
+## Array
+
 ### sortByKey
 
 ```js
