@@ -978,3 +978,36 @@ export const quantity = (
   else if (qty === 1) return `1 ${suffixOne}`;
   else return `${qty} ${suffixMany}`;
 };
+
+/**
+ * Converte bytes em um de seus múltiplos.
+ *
+ * @example
+ * filesize(null) // -> 0 Kb
+ * filesize('') // -> 0 Kb
+ * filesize(12354353) // -> 11 mb
+ *
+ * @param {Number} bytes
+ * @return {String} Valor convertido para kb, mb etc
+ */
+export const filesize = (bytes: number | string): string => {
+  if (!bytes) bytes = 0;
+
+  const map = [
+    { min: 0, max: 1, name: "byte", divisor: 1 },
+    { min: 2, max: 1023, name: "bytes", divisor: 1 },
+    { min: 1024, max: 1048575, name: "Kb", divisor: 1024 },
+    { min: 1048576, max: 1073741823, name: "Mb", divisor: 1048576 },
+    { min: 1073741824, max: 1099511627776, name: "Gb", divisor: 1073741824 },
+  ];
+
+  for (const item of map) {
+    if (bytes >= item.min && bytes <= item.max) {
+      return `${(+bytes / item.divisor) | 0} ${item.name}`;
+    }
+  }
+
+  // Retorna como gb
+  return `${(+bytes / 1073741824) | 0} Gb`;
+};
+

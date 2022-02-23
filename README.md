@@ -64,6 +64,8 @@ import { whiteList, isFalsy } from "klawtil";
 - [removeFromPosition](#removeFromPosition)
 - [applyMask](#applyMask)
 - [applyVars](#applyVars)
+- [quantity](#quantity)
+- [filesize](#filesize)
 
 [**Random**](#Random)
 
@@ -482,6 +484,15 @@ quantity(1, "mensagens", "mensagem", "nenhuma mensagem");
 quantity(2, "mensagens", "mensagem", "nenhuma mensagem");
 // -> 2 mensagens
 ```
+
+### filesize
+
+```js
+filesize(null); // -> 0 Kb
+filesize(""); // -> 0 Kb
+filesize(12354353); // -> 11 mb
+```
+
 ## Random
 
 ### keyGenerator
