@@ -536,3 +536,21 @@ test("sortByKey", () => {
   expect(arr2[2]).toMatchObject({ age: "20", name: "claudio" });
   expect(arr2[3]).toMatchObject({ age: "25", name: "marta" });
 });
+
+import { toBoolean } from "./main";
+test("toBoolean", () => {
+  expect(toBoolean("a")).toBe(true);
+  expect(toBoolean(1)).toBe(true);
+  expect(toBoolean("true")).toBe(true);
+  expect(toBoolean("0")).toBe(false);
+  expect(toBoolean(0)).toBe(false);
+  expect(toBoolean("false")).toBe(false);
+  expect(toBoolean(false)).toBe(false);
+  expect(toBoolean("")).toBe(false);
+  expect(toBoolean("undefined")).toBe(false);
+  expect(toBoolean(undefined)).toBe(false);
+  expect(toBoolean("NaN")).toBe(false);
+  expect(toBoolean(NaN)).toBe(false);
+  expect(toBoolean("null")).toBe(false);
+  expect(toBoolean(null)).toBe(false);
+});

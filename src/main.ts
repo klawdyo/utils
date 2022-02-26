@@ -1033,3 +1033,31 @@ export const sortByKey = (
 
   // list.sort();
 };
+
+/**
+ *
+ * Converte um valor boolean, analisando seu conteúdo, mesmo que seja uma string.
+ * Se for um valor possivelmente falsy, converte para falsy
+ *
+ * @example
+ * toBoolean("a"); // -> true
+ * toBoolean(1); // -> true
+ * toBoolean("true"); // -> true
+ * toBoolean("0"); // -> false
+ * toBoolean(0); // -> false
+ * toBoolean("false"); // -> false
+ * toBoolean(false); // -> false
+ * toBoolean(""); // -> false
+ * toBoolean("undefined"); // -> false
+ * toBoolean(undefined); // -> false
+ * toBoolean("NaN"); // -> false
+ * toBoolean(NaN); // -> false
+ * toBoolean("null"); // -> false
+ * toBoolean(null); // -> false
+ *
+ * @param {*} value
+ * @returns {Boolean}
+ */
+export function toBoolean(value: any): boolean {
+  return !isFalsy(value);
+}

@@ -57,6 +57,10 @@ import { whiteList, isFalsy } from "klawtil";
 
 - [sortByKey](#sortByKey)
 
+[**Boolean**](#Boolean)
+
+- [toBoolean](#toBoolean)
+
 [**String**](#String)
 
 - [slug](#slug)
@@ -371,6 +375,27 @@ clearFalsy({ id: 1, age: "0", idade: "NaN", birth: "" }); // -> { id: 1 }
 ```js
 sortByKey([{ name: "marta" }, { name: "claudio" }, { name: "isa" }], "name");
 // -> [ {name: 'claudio',}, {name: 'isa',}, {name: 'marta',} ]
+```
+
+## Boolean
+
+### toBoolean
+
+```js
+toBoolean("a"); // -> true
+toBoolean(1); // -> true
+toBoolean("true"); // -> true
+toBoolean("0"); // -> false
+toBoolean(0); // -> false
+toBoolean("false"); // -> false
+toBoolean(false); // -> false
+toBoolean(""); // -> false
+toBoolean("undefined"); // -> false
+toBoolean(undefined); // -> false
+toBoolean("NaN"); // -> false
+toBoolean(NaN); // -> false
+toBoolean("null"); // -> false
+toBoolean(null); // -> false
 ```
 
 ## String
