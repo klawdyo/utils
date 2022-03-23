@@ -666,8 +666,7 @@ export function objectFlat(obj: Record<string, any>): Record<string, any> {
         }
 
         const value = currentNode[key];
-        if (typeof value === "object") {
-          traverseAndFlatten(value, target, newKey);
+        if (typeof value === "object" && value !== null) {
         } else {
           target[newKey] = value;
         }
