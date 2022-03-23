@@ -322,26 +322,27 @@ prefixObjectKeys(original, "people.*.");
 ### objectFlat
 
 ```js
-const obj = {
-  id: 1,
-  name: "claudio",
-  age: 39,
-  email: "email@mail.com",
-  address: {
-    street: "Monkey St.",
-    number: "599",
-    city: "Halalala",
-    zipcode: "9876543",
-  },
-};
 
-objectFlat(obj);
-// ->
-// {
-//   id: 1, name: 'claudio', age: 39, email: 'email@mail.com',
-//   'address.street': 'Monkey St.', 'address.number': '599',
-//   'address.city': 'Halalala', 'address.zipcode': '9876543'
-// }
+
+ // Dados de exemplo
+ const obj = {
+   name: 'claudio'
+   address: { street: 'Monkey St.' }
+ }
+
+ objectFlat( obj )
+   // -> { name: 'claudio', 'address.street': 'Monkey St.' }
+
+ objectFlat( obj, '_' )
+   // -> { name: 'claudio', address_street: 'Monkey St.' }
+
+ objectFlat( { name: 'ze', info: { age: 36 } }, '_' )
+   // -> { name: 'ze', info_age: 36 }
+
+ objectFlat( { name:'ze', info: { age: null } }, '_' )
+   // -> { name: 'ze', info_age: null }
+
+
 ```
 
 ### whiteList
