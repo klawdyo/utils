@@ -632,28 +632,40 @@ export function prefixObjectKeys(obj: any, prefix = ""): any {
  * @example
  *
  *   const obj = {
- *     id: 1, name: 'claudio', age: 39, email: 'email@mail.com',
- *     address: {
- *        street': 'Monkey St.', number': '599', city': 'Halalala', zipcode': '9876543'
- *     }
+ *     name: 'claudio'
+ *     address: { street': 'Monkey St.' }
  *   }
  *
  *   objectFlat( obj )
  *     // ->
- *     {
- *       id: 1, name: 'claudio', age: 39, email: 'email@mail.com',
- *       'address.street': 'Monkey St.', 'address.number': '599',
- *       'address.city': 'Halalala', 'address.zipcode': '9876543'
- *     }
+ *     { name: 'claudio', 'address.street': 'Monkey St.' }
+ *
+ *   objectFlat( obj, '_' )
+ *     // ->
+ *     { name: 'claudio', address_street: 'Monkey St.' }
+ *
+ *   objectFlat( {name:'ze', info:{age:null}}, '_' )
+ *     // ->
+ *     { name: 'claudio', address_street: 'Monkey St.' }
+ *
+ *
+ *   objectFlat( {name:'ze', info:{age:null}}, '_' )
+ *     // ->
+ *     { name: 'ze', info_age: null }
  *
  * @param {Object} obj
+ * @param {String} separator Default "."
  * @returns {Object}
  */
-export function objectFlat(obj: Record<string, any>): Record<string, any> {
+export function objectFlat(
+  obj: Record<string, any>,
+  separator = "."
+): Record<string, any> {
   function traverseAndFlatten(
     currentNode: any,
     target: any,
-    flattenedKey: string | undefined = undefined
+    flattenedKey: string | undefined = undefined,
+    separator: string
   ) {
     for (const key in currentNode) {
       // eslint-disable-next-line no-prototype-builtins
@@ -662,11 +674,13 @@ export function objectFlat(obj: Record<string, any>): Record<string, any> {
         if (flattenedKey === undefined) {
           newKey = key;
         } else {
-          newKey = flattenedKey + "." + key;
+          newKey = flattenedKey + separator + key;
         }
 
         const value = currentNode[key];
+
         if (typeof value === "object" && value !== null) {
+          traverseAndFlatten(value, target, newKey, separator);
         } else {
           target[newKey] = value;
         }
@@ -674,13 +688,13 @@ export function objectFlat(obj: Record<string, any>): Record<string, any> {
     }
   }
 
-  function flatten(obj: Record<string, any>) {
+  function flatten(obj: Record<string, any>, separator: string) {
     const flattenedObject = {};
-    traverseAndFlatten(obj, flattenedObject);
+    traverseAndFlatten(obj, flattenedObject, undefined, separator);
     return flattenedObject;
   }
 
-  return flatten(obj);
+  return flatten(obj, separator);
 }
 
 /**

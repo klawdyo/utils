@@ -290,31 +290,53 @@ test("prefixObjectKeys", () => {
 import { objectFlat } from "./main";
 test("objectFlat", () => {
   const obj = {
-    id: 1,
     name: "claudio",
-    age: 39,
-    email: "email@mail.com",
     address: {
-      street: "Monkey St.",
-      number: "599",
-      city: "Halalala",
-      zipcode: "9876543",
+      street: "Rua X",
     },
   };
 
-  // ->
-  const expected = {
-    id: 1,
+  expect(objectFlat(obj)).toMatchObject({
     name: "claudio",
-    age: 39,
-    email: "email@mail.com",
-    "address.street": "Monkey St.",
-    "address.number": "599",
-    "address.city": "Halalala",
-    "address.zipcode": "9876543",
+    "address.street": "Rua X",
+  });
+});
+
+test("objectFlat - Teste Mudando o separador", () => {
+  const obj = {
+    name: "claudio",
+    address: {
+      street: "Rua X",
+    },
   };
 
-  expect(objectFlat(obj)).toMatchObject(expected);
+  expect(objectFlat(obj, "_")).toMatchObject({
+    name: "claudio",
+    address_street: "Rua X",
+  });
+
+  expect(objectFlat(obj, "/")).toMatchObject({
+    name: "claudio",
+    "address/street": "Rua X",
+  });
+});
+
+test("objectFlat - null - Teste com uma das chaves com valor null", () => {
+  const obj = {
+    name: "claudio",
+    address: {
+      street: "Rua X",
+      number: null,
+    },
+  };
+
+  const flatten = objectFlat(obj, "_");
+
+  expect(flatten).toMatchObject({
+    name: "claudio",
+    address_street: "Rua X",
+    address_number: null,
+  });
 });
 
 import { whiteList } from "./main";
