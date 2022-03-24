@@ -362,6 +362,9 @@ prefixObjectKeys(original, "people.*.");
  objectFlat( { name:'ze', info: { age: null } }, '_' )
    // -> { name: 'ze', info_age: null }
 
+ objectFlat( { name:'ze', info: { birth: new Date('1982-07-31') } }, '_' )
+   // -> { name: 'ze', info_birth: 1982-07-31T00:00:00.000Z }
+
 
 ```
 

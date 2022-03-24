@@ -669,21 +669,22 @@ export function prefixObjectKeys(obj: any, prefix = ""): any {
  *   }
  *
  *   objectFlat( obj )
- *     // ->
- *     { name: 'claudio', 'address.street': 'Monkey St.' }
+ *     // -> { name: 'claudio', 'address.street': 'Monkey St.' }
  *
  *   objectFlat( obj, '_' )
- *     // ->
- *     { name: 'claudio', address_street: 'Monkey St.' }
+ *     // -> { name: 'claudio', address_street: 'Monkey St.' }
  *
  *   objectFlat( {name:'ze', info:{age:null}}, '_' )
- *     // ->
- *     { name: 'claudio', address_street: 'Monkey St.' }
- *
+ *     // -> { name: 'claudio', address_street: 'Monkey St.' }
  *
  *   objectFlat( {name:'ze', info:{age:null}}, '_' )
- *     // ->
- *     { name: 'ze', info_age: null }
+ *     // -> { name: 'ze', info_age: null }
+ *
+ *   objectFlat( {name:'ze', info:{age:null}}, '_' )
+ *     // -> { name: 'ze', info_age: null }
+ *
+ *    objectFlat({ birth: new Date('1982-07-31'), address: {  number: null, } }, '_')
+ *      // -> { birth: new Date('1982-07-31'), address_number: null }
  *
  * @param {Object} obj
  * @param {String} separator Default "."
@@ -711,7 +712,7 @@ export function objectFlat(
 
         const value = currentNode[key];
 
-        if (typeof value === "object" && value !== null) {
+        if (isJSON(value)) {
           traverseAndFlatten(value, target, newKey, separator);
         } else {
           target[newKey] = value;

@@ -338,7 +338,7 @@ test("objectFlat - Teste Mudando o separador", () => {
   });
 });
 
-test("objectFlat - null - Teste com uma das chaves com valor null", () => {
+test("objectFlat - null - Teste com uma dos itens com valor null", () => {
   const obj = {
     name: "claudio",
     address: {
@@ -353,6 +353,20 @@ test("objectFlat - null - Teste com uma das chaves com valor null", () => {
     name: "claudio",
     address_street: "Rua X",
     address_number: null,
+  });
+});
+
+test("objectFlat - object - Teste com um dos itens sendo objeto não JSON", () => {
+  const obj = {
+    name: "claudio",
+    info: {
+      birth: new Date("1982-07-31"),
+    },
+  };
+
+  expect(objectFlat(obj, "_")).toMatchObject({
+    name: obj.name,
+    info_birth: obj.info.birth,
   });
 });
 
