@@ -158,6 +158,38 @@ export const isNumeric = (value: any, forceType = false): boolean => {
 };
 
 /**
+ * Verifica se um dado valor é um objeto JSON
+ *
+ * @example
+ *
+ *   isJSON( true )            // -> false
+ *   isJSON( false )           // -> false
+ *   isJSON( '' )              // -> false
+ *   isJSON( null )            // -> false
+ *   isJSON( undefined )       // -> false
+ *   isJSON( NaN )             // -> false
+ *   isJSON( 'claudio' )       // -> false
+ *   isJSON( 4654 )            // -> false
+ *   isJSON( 0 )               // -> false
+ *   isJSON( [1,2,3] )         // -> false
+ *   isJSON( new Date() )      // -> false
+ *   isJSON( "{ age: 21 }" )   // -> false
+ *   isJSON( { age: 21 } )     // -> true
+ *
+ *
+ * @param {*} value
+ * @returns {Boolean}
+ */
+export const isJSON = (value: any): boolean => {
+  try {
+    const str = JSON.stringify(value);
+    return str[0] === "{";
+  } catch (error) {
+    return false;
+  }
+};
+
+/**
  * checkTypes
  * Verifica se o valor passado bate com algum dos tipos
  * http://tobyho.com/2011/01/28/checking-types-in-javascript/

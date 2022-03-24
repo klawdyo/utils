@@ -35,13 +35,14 @@ import { whiteList, isFalsy } from "klawtil";
 - [isInteger](#isInteger)
 - [isFloat](#isFloat)
 - [isNumeric](#isNumeric)
-- [checkTypes](#checkTypes)
 - [isEmail](#isEmail)
 - [isDate](#isDate)
 - [isDateBR](#isDateBR)
 - [isTime](#isTime)
 - [isFalsy](#isFalsy)
 - [isTruthy](#isTruthy)
+- [isJSON](#isJSON)
+- [checkTypes](#checkTypes)
 
 [**Object**](#Object)
 
@@ -161,22 +162,6 @@ isNumeric("claudio"); // -> false
 isNumeric(false); // -> false
 ```
 
-### checkTypes
-
-```js
-checkTypes(1, String); // -> false
-checkTypes("1", String); // -> true
-checkTypes(1, Number); // -> true
-checkTypes("1", Number); // -> false
-checkTypes(1, [String, Number]); // -> true
-checkTypes("a", [String, Number]); // -> true
-checkTypes({}, [String, Number]); // -> false
-checkTypes([], [String, Number]); // -> false
-checkTypes([], [String, Number, Array]); // -> true
-checkTypes({}, [String, Number, Array]); // -> false
-checkTypes({}, [String, Number, Array, Object]); // -> true
-```
-
 ### isEmail
 
 ```js
@@ -257,6 +242,41 @@ isTruthy("null"); // -> false
 isTruthy("false"); // -> false
 isTruthy(undefined); // -> false
 isTruthy("undefined"); // -> false
+```
+
+### isJSON
+
+```js
+isJSON(0); // -> false
+isJSON(12); // -> false
+isJSON(""); // -> false
+isJSON(NaN); // -> false
+isJSON(null); // -> false
+isJSON(true); // -> false
+isJSON(false); // -> false
+isJSON("banna"); // -> false
+isJSON(undefined); // -> false
+isJSON(new Date()); // -> false
+isJSON([1, 2, 3, 4]); // -> false
+isJSON("{ age: 21 }"); // -> false
+
+isJSON({ age: 21 }); // -> true
+```
+
+### checkTypes
+
+```js
+checkTypes(1, String); // -> false
+checkTypes("1", String); // -> true
+checkTypes(1, Number); // -> true
+checkTypes("1", Number); // -> false
+checkTypes(1, [String, Number]); // -> true
+checkTypes("a", [String, Number]); // -> true
+checkTypes({}, [String, Number]); // -> false
+checkTypes([], [String, Number]); // -> false
+checkTypes([], [String, Number, Array]); // -> true
+checkTypes({}, [String, Number, Array]); // -> false
+checkTypes({}, [String, Number, Array, Object]); // -> true
 ```
 
 ## Object
