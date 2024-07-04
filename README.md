@@ -81,6 +81,7 @@ import { whiteList, isFalsy } from "klawtil";
 - [keyGenerator](#keyGenerator)
 - [randomNumber](#randomNumber)
 - [randomLetter](#randomLetter)
+- [timeUUID](#timeUUID)
 
 ## Comparation
 
@@ -578,6 +579,15 @@ randomNumber(4); // -> 831
 ```js
 randomLetter(); // -> A
 randomLetter(); // -> S
+```
+
+### timeUUID
+
+Gera um uuid v4 baseado no tempo atual
+
+```js
+timeUUID(); // -> 1268a7f9-f641-44b6-079d-1286a5000169
+timeUUID(); // -> 1268a7f9-f641-44d7-56fe-cb23e7400188
 ```
 
 ## Tests
