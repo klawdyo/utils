@@ -2,6 +2,8 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { performance } from 'perf_hooks';
+
 /***************************************************
  * UTILS
  * Funções soltas de cunho geral que servem em outros locais do app
@@ -16,6 +18,8 @@ type ApplyVarsOptions = {
   start: string;
   end: string;
 };
+
+
 
 /*************************************************************************
  *
@@ -1048,7 +1052,7 @@ export const filesize = (bytes: number | string): string => {
   ];
 
   for (const item of map) {
-    if (bytes >= item.min && bytes <= item.max) {
+    if (+bytes >= item.min && +bytes <= item.max) {
       return `${(+bytes / item.divisor) | 0} ${item.name}`;
     }
   }
@@ -1106,4 +1110,57 @@ export const sortByKey = (
  */
 export function toBoolean(value: any): boolean {
   return !isFalsy(value);
+}
+
+/**
+ *
+ * Gera um UUID V4 ordenável, usando a data atual como base
+ *
+ */
+export function timeUUID() {
+  const date = new Date();
+  // Extrair os componentes da data
+  const year = String(date.getFullYear()).padStart(4, "0"); // Ano com 4 caracteres
+  const month = String(date.getMonth() + 1).padStart(2, "0"); // Mês com 2 caracteres
+  const day = String(date.getDate()).padStart(2, "0"); // Dia com 2 caracteres
+  const hours = String(date.getHours()).padStart(2, "0"); // Hora com 2 caracteres
+  const minutes = String(date.getMinutes()).padStart(2, "0"); // Minuto com 2 caracteres
+  const seconds = String(date.getSeconds()).padStart(2, "0"); // Segundo com 2 caracteres
+
+  // Combinar as strings hexadecimais
+  const group12 = `${year}${month}${day}${hours}${minutes}${seconds}`;
+
+  const milliseconds = date.getMilliseconds().toString().padStart(4, "0");
+  const perf16 = performance
+    .now()
+    .toString()
+    .replace(".", "")
+    .slice(0, 16)
+    .padEnd(16, "0");
+
+  // console.log({ group12, milliseconds, perf16 });
+
+  // Os demais caracteres do 3, o 4 e o quinto.
+  const group345 = [milliseconds, perf16].join("");
+
+  const hex1 = parseInt(group12, 10).toString(16);
+  const hex2 = parseInt(group345, 10).toString(16);
+  // console.log({ group12, group345 });
+
+  const len = 31 - hex1.length - hex2.length;
+  const rand = Math.floor(Math.random() * Math.pow(10, len))
+    .toString()
+    .padStart(len, "0");
+
+  // console.log({ hex1, hex2, rand, len });
+
+  const hex = hex1 + hex2 + rand;
+
+  return [
+    hex.slice(0, 8),
+    hex.slice(8, 12),
+    "4" + hex.slice(12, 15),
+    hex.slice(15, 19),
+    hex.slice(19),
+  ].join("-");
 }
