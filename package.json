@@ -27,7 +27,7 @@
     "test:coverage": "jest --collectCoverageFrom=src/**/*.ts --coverage",
     "docs": "typedoc --entryPoints src/main.ts",
     "build": "tsc -p tsconfig.json",
-    "prepublish": "yarn build && yarn docs"
+    "prepublish": "npm run build && npm run docs"
   },
   "devDependencies": {
     "@types/jest": "^26.0.21",
