@@ -598,6 +598,7 @@ timeUUID(); // -> 1268a7f9-f641-44d7-56fe-cb23e7400188
 
 ## Build
 
-Tested on node versions 10, 12, 14 and 16
+Tested on node versions 18, 20 and 22
 
-![image](https://user-images.githubusercontent.com/100168/153756200-57f2b7a9-28c2-4927-bd44-6e57674c07ab.png)
+![image](https://github.com/klawdyo/klawtil/assets/100168/c4664038-0bf0-46bc-bb98-9a12948caabc)
+
