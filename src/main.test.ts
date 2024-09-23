@@ -614,7 +614,7 @@ test("timeUUID - executa 10 mil vezes", () => {
   let count = 0;
   const list: string[] = [];
   while (count < num) {
-    const uuid = timeUUID();
+    const uuid = timeUUID();    
 
     // Adiciona à lista de gerados
     list.push(uuid);

@@ -2,7 +2,6 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { performance } from 'perf_hooks';
 
 /***************************************************
  * UTILS
@@ -1131,8 +1130,7 @@ export function timeUUID() {
   const group12 = `${year}${month}${day}${hours}${minutes}${seconds}`;
 
   const milliseconds = date.getMilliseconds().toString().padStart(4, "0");
-  const perf16 = performance
-    .now()
+  const perf16 = (Math.random() * 9999999999)
     .toString()
     .replace(".", "")
     .slice(0, 16)
